@@ -1,0 +1,94 @@
+<html>
+<head>
+  <title>BodySlam Game</title>
+  <style type="text/css">
+body {
+ background-color: #000000;
+ font-family: "Lucida Console","Courier New",Courier,monospace;
+ font-size: medium;
+ color: #FFFFFF
+}
+a:link, a:visited, a:hover, a:active {
+ color: #FF99FF;
+ text-decoration: underline
+}
+.debug {
+ color: #999999
+}
+.lime {
+ color: #00FF00
+}
+.red {
+ color: #FF0000
+}
+.yellow {
+ color: #FFFF00
+}
+.orange {
+ color: #FF9900
+}
+.boxed {
+  border: 1px solid #000000 ;
+}
+#healthbox {
+	float: left;
+    width: 250px;
+    height: 300px;
+    background-color: #FFFFFF;
+    color: #000000
+}
+#movesbox {
+    float: left;
+    width: 250px;
+    height: 300px;
+    background-color: #FFFFFF;
+    color: #000000
+}
+#gamelog {
+    float: left;
+    width: 600px;
+    height: 600px;
+    overflow-y: auto;
+    background-color: #FFFFFF;
+    color: #000000
+}
+</style>
+</head>
+<body>
+
+<center>Hello and welcome to Champions of Wrestling!!!<br><br>
+The Brooklyn Brawler knows 4 moves:            <br>
+         bodyslam: A more accurate move, but causes less damage.<br>
+         clothesline: A devastating attack, but it lands less often.<br>
+         suplex: His signature move, but you can only use it once a match<br>
+         DDT: The most devastating move the Brawler knows, but it can only be used 1 time!<br><br>
+Movement:  You can do 1 move action per turn.<br>
+One must be engaged to do grapple moves.  One must be disengaged to do running moves.<br>
+(Note: All of the Brooklyn Brawler's moves are currently grapple moves)<br>
+If you have moved on your turn before attacking, your attack will include a -1 penalty<br><br>
+<div id="container">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<body id="gamebody">
+	<div id="animations" name="animations"><IMG SRC="ChampionshipWrestling.jpg"></div>
+	<div id="gamelog" name="gamelog"></div>
+	<div id="movesbox" class="boxed">
+		<script type="text/javascript" src="game.js" ></script>
+		<button id='startgame' onclick="startgame()">Find a Fight!</button><br><br>
+		<button id='startturn' onclick="startturn()">Start Your Turn!</button><br><br>
+		<div id="newdiv" name="newdiv"></div>
+		Move Actions: <button id='move' onclick="move()"></button><br>
+		Attack Actions: <br>
+		&nbsp;&nbsp;Anytime:<button id=bodyslam onclick="major('bodyslam')"></button><button id=clothesline onclick="major('clothesline')"></button><br>
+		&nbsp;&nbsp;One Time:<button id=suplex onclick="major('suplex')"></button><button id=ddt onclick="major('ddt')"></button><br><br>
+		<button id='endturn' onclick="endturn()">End Turn?</button>
+	</div>
+	<div id="healthbox" class="boxed"><center>
+		Brooklyn Brawler:<br>
+		Health:<div id="player_health_display"></div><br><br>
+		Opponent:<br>
+		Health:<div id="monster_health_display"></div><br></center></div>
+</body>
+</div>
+</center>
+</body>
+</html>

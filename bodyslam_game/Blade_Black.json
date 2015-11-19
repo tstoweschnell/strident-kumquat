@@ -1,0 +1,41 @@
+{
+	"name":"Blade Black",
+	"codename":"Goblin Blackblade",
+	"level":1,
+	"xp_value":100,
+	"health":25,
+	"defenses":{
+		"ac":16,
+		"fortitude":12,
+		"reflex":14,
+		"will":11
+	},
+	"moves":{
+		"bulldog":{
+			"id":1,
+			"moveName":"Bulldog",
+			"codename":"shortsword",
+			"attack":5,
+			"damagevol":1,
+			"against":"ac",
+			"damagedice":6,
+			"damagebonus":2,
+			"description":"A crunching attack.  That's bound to ring your bell!",
+			"used":0,
+			"hit":0
+		},
+		"reverse bulldog":{
+			"id":2,
+			"moveName":"Reverse Bulldog",
+			"codename":"short sword w combat adv",
+			"attack":7,
+			"against":"ac",
+			"damagevol":2,
+			"damagedice":6,
+			"damagebonus":2,
+			"description":"It's painful enough the regular way!",
+			"used":0
+		}
+	},
+	"needswork":1
+}

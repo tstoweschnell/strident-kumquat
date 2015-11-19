@@ -1,0 +1,39 @@
+{
+	"name":"Vlad the Impaler",
+	"codename":"Dire Rat",
+	"health":38,
+	"xp_value":100,
+	"defenses":{
+		"ac":15,
+		"fortitude":15,
+		"reflex":13,
+		"will":11
+	},
+	"moves":{
+		"piledriver":{
+			"id":1,
+			"moveName":"piledriver",
+			"codename":"bite",
+			"attack":4,
+			"against":"ac",
+			"damagevol":1,
+			"damagedice":6,
+			"damagebonus":2,
+			"description":"That move has been outlawed for years!",
+			"used":0,
+			"hit":0
+		},
+		"vicious piledriver":{
+			"id":2,
+			"moveName":"vicious piledriver",
+			"codename":"filth fever",
+			"attack":6,
+			"against":"ac",
+			"damagevol":1,
+			"damagedice":6,
+			"damagebonus":2,
+			"description":"That move has been outlawed for years!",
+			"used":0
+		}
+	}
+}

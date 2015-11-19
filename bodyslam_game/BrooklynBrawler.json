@@ -1,0 +1,69 @@
+{
+	"name":"Brooklyn Brawler",
+	"record":{
+		"wins":0,
+		"losses":0
+		},
+	"experience":0,
+	"health":30,
+	"defenses":{
+		"ac":16,
+		"fortitude":16,
+		"reflex":10,
+		"will":12
+	},
+	"moves":{
+		"bodyslam":{
+			"id":1,
+			"moveName":"bodyslam",
+			"frequency":"atwill",
+			"against":"ac",
+			"proximity":1,
+			"attack":6,
+			"damagevol":1,
+			"damagedice":12,
+			"damagebonus":0,
+			"description":"If you aim carefully, you can hit that pressure point.",
+			"used":0
+		},
+		"clothesline":{
+			"id":2,
+			"moveName":"clothesline",
+			"frequency":"atwill",
+			"against":"ac",
+			"proximity":1,
+			"attack":4,
+			"damagevol":1,
+			"damagedice":12,
+			"damagebonus":4,
+			"description":"It dont matter how hard it hurts, as long as it hurts!",
+			"used":0
+		},
+		"suplex":{
+			"id":3,
+			"moveName":"suplex",
+			"frequency":"signature",
+			"against":"ac",
+			"proximity":1,
+			"attack":4,
+			"damagevol":2,
+			"damagedice":12,
+			"damagebonus":4,
+			"description":"No matter how tough your opponent is, that's got to hurt!",
+			"used":0
+		},
+		"ddt":{
+			"id":3,
+			"moveName":"DDT",
+			"frequency":"finisher",
+			"against":"ac",
+			"proximity":1,
+			"attack":4,
+			"damagevol":3,
+			"damagedice":12,
+			"damagebonus":4,
+			"description":"One of the most bone-shattering moves in history!",
+			"used":0
+		}
+	}
+}
