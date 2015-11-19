@@ -55,7 +55,7 @@ a:link, a:visited, a:hover, a:active {
 </style>
 </head>
 <body>
-
+<!--This text is static.  It is the intro to the game.  Need to transition this to a introduction and instructions page-->
 <center>Hello and welcome to Champions of Wrestling!!!<br><br>
 The Brooklyn Brawler knows 4 moves:            <br>
          bodyslam: A more accurate move, but causes less damage.<br>
@@ -72,7 +72,9 @@ If you have moved on your turn before attacking, your attack will include a -1 p
 	<div id="animations" name="animations"><IMG SRC="ChampionshipWrestling.jpg"></div>
 	<div id="gamelog" name="gamelog"></div>
 	<div id="movesbox" class="boxed">
+		<!--This is the box for the buttons.-->	
 		<script type="text/javascript" src="game.js" ></script>
+		<!--I still dont know how to get buttons to appear and disappear, so for now, I make them non-functional and remove the words.-->
 		<button id='startgame' onclick="startgame()">Find a Fight!</button><br><br>
 		<button id='startturn' onclick="startturn()">Start Your Turn!</button><br><br>
 		<div id="newdiv" name="newdiv"></div>
@@ -83,6 +85,7 @@ If you have moved on your turn before attacking, your attack will include a -1 p
 		<button id='endturn' onclick="endturn()">End Turn?</button>
 	</div>
 	<div id="healthbox" class="boxed"><center>
+		<!--This is the box for the health and updates.  This updates via actions in the javascript.-->
 		Brooklyn Brawler:<br>
 		Health:<div id="player_health_display"></div><br><br>
 		Opponent:<br>
