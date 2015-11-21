@@ -37,7 +37,7 @@ a:link, a:visited, a:hover, a:active {
     background-color: #FFFFFF;
     color: #000000
 }
-#movesbox {
+#buttonsbox {
     float: left;
     width: 250px;
     height: 300px;
@@ -47,7 +47,7 @@ a:link, a:visited, a:hover, a:active {
 #gamelog {
     float: left;
     width: 600px;
-    height: 600px;
+    height: 300px;
     overflow-y: auto;
     background-color: #FFFFFF;
     color: #000000
@@ -71,25 +71,25 @@ If you have moved on your turn before attacking, your attack will include a -1 p
 <body id="gamebody">
 	<div id="animations" name="animations"><IMG SRC="ChampionshipWrestling.jpg"></div>
 	<div id="gamelog" name="gamelog"></div>
-	<div id="movesbox" class="boxed">
+	<div id="buttonsbox" class="boxed">
 		<!--This is the box for the buttons.-->	
 		<script type="text/javascript" src="game.js" ></script>
 		<!--I still dont know how to get buttons to appear and disappear, so for now, I make them non-functional and remove the words.-->
-		<button id='startgame' onclick="startgame()">Find a Fight!</button><br><br>
-		<button id='startturn' onclick="startturn()">Start Your Turn!</button><br><br>
-		<div id="newdiv" name="newdiv"></div>
-		Move Actions: <button id='move' onclick="move()"></button><br>
-		Attack Actions: <br>
-		&nbsp;&nbsp;Anytime:<button id=bodyslam onclick="major('bodyslam')"></button><button id=clothesline onclick="major('clothesline')"></button><br>
-		&nbsp;&nbsp;One Time:<button id=suplex onclick="major('suplex')"></button><button id=ddt onclick="major('ddt')"></button><br><br>
-		<button id='endturn' onclick="endturn()">End Turn?</button>
+		<div id='startfightbox'><button id='startfight' onclick="startfight()">Find a Fight!</button></div><br><br>
+		<div id='startturnbox'></div><br><br>
+		<div id='movesbox'></div>
+		<div id='minorsbox'></div>
+		<div id='majorsbox'></div>
+		<div id='endturnbox'></div>		
 	</div>
 	<div id="healthbox" class="boxed"><center>
 		<!--This is the box for the health and updates.  This updates via actions in the javascript.-->
 		Brooklyn Brawler:<br>
-		Health:<div id="player_health_display"></div><br><br>
+		Health: <div id="player_health_display"></div><br><br>
+		<div id="player_effects_display"></div><br><br>
 		Opponent:<br>
-		Health:<div id="monster_health_display"></div><br></center></div>
+		<div id="monster_name_display"></div><br>
+		Health: <div id="monster_health_display"></div><br></center></div>
 </body>
 </div>
 </center>
