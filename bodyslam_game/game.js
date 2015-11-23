@@ -14,6 +14,9 @@
 //13. monsteraction - a library of the strategies that the opponents will take.
 //14. monster_major - the opponent's attack action.
 //15. endturn - end the player's turn and initialize the opponent's turn.
+//16. effect_if_hit - 
+//17. effect_if_miss - 
+//18. effect_hit_or_miss - 
 
 
 
@@ -51,6 +54,21 @@ var Wrestler = function (file) {
 
 
 
+//The Wrestler function is the way I create players and opponents.
+//It calls to the necessary json and applies that player to this game
+var MovesLibrary = function (file) {
+	var _this = this;
+	$.ajax({
+		url: file,
+		dataType: 'json',
+		success: function (data) {
+			_this.sheet = data;
+		}
+	});
+};
+
+
+
 //This is the function that begins the fight.  It creates the player in game and randomly
 //Assigns an enemy for the match.
 //I'd rather this be at the top of the file, but I think i have to have Wrestler already defined.
@@ -63,6 +81,7 @@ var FightGame = function () {
 	this.majortaken = 0;
 	this.turn = 0;
 	this.temphealth = 0;
+	this.moves_library = new MovesLibrary("moves_library.json");
 	this.player = new Wrestler("BulkLogan.json");
 	var enemy_list = {1:"Rob_Johnson.json",2:"Vlad.json",3:"Blade_Black.json",4:"Scorpio.json"}
 	var rando_enemy = Math.floor(Math.random() * 4 + 1);
@@ -250,24 +269,7 @@ function startturn(){
 
 
 
-function effect_if_hit(value) {
-	try {
-		window.game.temp_player_att_bonus = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus;
-		window.game.temp_player_att_bonus_length = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus_length;
-		document.getElementById("player_effects_display").innerHTML="+"+window.game.temp_player_att_bonus+" to attack";
-		console.log("you gain a +"+window.game.temp_player_att_bonus+" to attack for "+window.game.temp_player_att_bonus_length+" turn");
-    } catch(err) {
-    	console.log(" ")
-    }
-}
 
-function effect_if_miss() {
-	console.log(" ")
-}
-
-function effect_hit_or_miss() {
-	console.log(" ")
-}
 
 //This is the move button.
 //for now, all of the player's moves require being "engaged", but the button works the way it should.
@@ -546,6 +548,30 @@ function endturn(){
 
 
 
+
+
+function effect_if_hit(value) {
+	try {
+		window.game.temp_player_att_bonus = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus;
+		window.game.temp_player_att_bonus_length = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus_length;
+		document.getElementById("player_effects_display").innerHTML="+"+window.game.temp_player_att_bonus+" to attack";
+		console.log("you gain a +"+window.game.temp_player_att_bonus+" to attack for "+window.game.temp_player_att_bonus_length+" turn");
+    } catch(err) {
+    	console.log(" ")
+    }
+}
+
+
+
+function effect_if_miss() {
+	console.log(" ")
+}
+
+
+
+function effect_hit_or_miss() {
+	console.log(" ")
+}
 
 
 // in if_hit:

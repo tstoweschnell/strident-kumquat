@@ -27,71 +27,25 @@ a:link, a:visited, a:hover, a:active {
 .orange {
  color: #FF9900
 }
-.boxed {
-  border: 1px solid #000000 ;
-}
-#healthbox {
-	float: left;
-    width: 250px;
-    height: 300px;
-    background-color: #FFFFFF;
-    color: #000000
-}
-#buttonsbox {
-    float: left;
-    width: 250px;
-    height: 300px;
-    background-color: #FFFFFF;
-    color: #000000
-}
-#gamelog {
-    float: left;
-    width: 600px;
-    height: 300px;
-    overflow-y: auto;
-    background-color: #FFFFFF;
-    color: #000000
-}
 </style>
 </head>
 <body>
 <!--This text is static.  It is the intro to the game.  Need to transition this to a introduction and instructions page-->
-<center>Hello and welcome to Champions of Wrestling!!!<br><br>
-The Brooklyn Brawler knows 4 moves:            <br>
-         bodyslam: A more accurate move, but causes less damage.<br>
-         clothesline: A devastating attack, but it lands less often.<br>
-         suplex: His signature move, but you can only use it once a match<br>
-         DDT: The most devastating move the Brawler knows, but it can only be used 1 time!<br><br>
-Movement:  You can do 1 move action per turn.<br>
-One must be engaged to do grapple moves.  One must be disengaged to do running moves.<br>
-(Note: All of the Brooklyn Brawler's moves are currently grapple moves)<br>
-If you have moved on your turn before attacking, your attack will include a -1 penalty<br><br>
-<div id="container">
+<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script-->
+<!--script type="text/javascript" src="introduction.js"></script-->
+<center>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<body id="gamebody">
-	<div id="animations" name="animations"><IMG SRC="ChampionshipWrestling.jpg"></div>
-	<div id="gamelog" name="gamelog"></div>
-	<div id="buttonsbox" class="boxed">
-		<!--This is the box for the buttons.-->	
-		<script type="text/javascript" src="game.js" ></script>
-		<!--I still dont know how to get buttons to appear and disappear, so for now, I make them non-functional and remove the words.-->
-		<div id='startfightbox'><button id='startfight' onclick="startfight()">Find a Fight!</button></div><br><br>
-		<div id='startturnbox'></div><br><br>
-		<div id='movesbox'></div>
-		<div id='minorsbox'></div>
-		<div id='majorsbox'></div>
-		<div id='endturnbox'></div>		
-	</div>
-	<div id="healthbox" class="boxed"><center>
-		<!--This is the box for the health and updates.  This updates via actions in the javascript.-->
-		Brooklyn Brawler:<br>
-		Health: <div id="player_health_display"></div><br><br>
-		<div id="player_effects_display"></div><br><br>
-		Opponent:<br>
-		<div id="monster_name_display"></div><br>
-		Health: <div id="monster_health_display"></div><br></center></div>
-</body>
-</div>
+<script type="text/javascript" src="introduction.js" ></script>
+<div id="msg1">Hello and welcome to Champions of Wrestling!!!</div><br>
+<div id="animations" name="animations"><IMG SRC="ChampionshipWrestling.jpg"></div>
+<div id="msg2"></div><br>
+<div id="msg3"></div><br>
+<div id="msg4"></div><br>
+<div id="msg5"></div><br>
+<div id="msg6"></div><br>
+<div id="msg7"></div><br>
+<div id="action_button"><button id='v1' onclick='welcome1()'>Thanks.  Happy to be here</button></div>
+
 </center>
 </body>
 </html>

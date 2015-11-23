@@ -1,0 +1,66 @@
+{
+	"m0":{
+		"id":1,
+		"moveName":"bodyslam",
+		"frequency":"atwill",
+		"player_elig":0,
+		"monster_elig":0,
+		"against":"reflex",
+		"proximity":0,
+		"attack":4,
+		"damagevol":1,
+		"damagedice":8,
+		"damagebonus":2,
+		"description":"An old school move for an old school badass.",
+		"used":0,
+		"if_hit":{
+			"temp_player_att_bonus":2,
+			"temp_player_att_bonus_length":1
+			}
+	},
+	"m1":{
+		"id":2,
+		"moveName":"clothesline",
+		"frequency":"atwill",
+		"player_elig":0,
+		"monster_elig":0,
+		"against":"ac",
+		"proximity":1,
+		"attack":4,
+		"damagevol":1,
+		"damagedice":12,
+		"damagebonus":4,
+		"description":"It dont matter how hard it hurts, as long as it hurts!",
+		"used":0
+	},
+	"m2":{
+		"id":3,
+		"moveName":"suplex",
+		"frequency":"signature",
+		"player_elig":0,
+		"monster_elig":0,
+		"against":"ac",
+		"proximity":1,
+		"attack":4,
+		"damagevol":2,
+		"damagedice":12,
+		"damagebonus":4,
+		"description":"No matter how tough your opponent is, that's got to hurt!",
+		"used":0
+	},
+	"m3":{
+		"id":4,
+		"moveName":"DDT",
+		"frequency":"finisher",
+		"player_elig":0,
+		"monster_elig":0,
+		"against":"ac",
+		"proximity":1,
+		"attack":4,
+		"damagevol":3,
+		"damagedice":12,
+		"damagebonus":4,
+		"description":"One of the most bone-shattering moves in history!",
+		"used":0
+	}
+}

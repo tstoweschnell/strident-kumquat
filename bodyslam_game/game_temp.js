@@ -14,6 +14,9 @@
 //13. monsteraction - a library of the strategies that the opponents will take.
 //14. monster_major - the opponent's attack action.
 //15. endturn - end the player's turn and initialize the opponent's turn.
+//16. effect_if_hit - allows for effects that happen only when the wrestler hits.
+//17. effect_if_miss - will allow for effects that happen when the wrestler misses
+//18. effect_hit_or_miss - will allow effects in addition to those on hits, misses.
 
 
 
@@ -51,6 +54,21 @@ var Wrestler = function (file) {
 
 
 
+//The Wrestler function is the way I create players and opponents.
+//It calls to the necessary json and applies that player to this game
+var MovesLibrary = function (file) {
+	var _this = this;
+	$.ajax({
+		url: file,
+		dataType: 'json',
+		success: function (data) {
+			_this.sheet = data;
+		}
+	});
+};
+
+
+
 //This is the function that begins the fight.  It creates the player in game and randomly
 //Assigns an enemy for the match.
 //I'd rather this be at the top of the file, but I think i have to have Wrestler already defined.
@@ -63,7 +81,8 @@ var FightGame = function () {
 	this.majortaken = 0;
 	this.turn = 0;
 	this.temphealth = 0;
-	this.player = new Wrestler("BulkLogan.json");
+	this.moves_library = new MovesLibrary("moves_library.json");
+	this.player = new Wrestler("BrooklynBrawler.json");
 	var enemy_list = {1:"Rob_Johnson.json",2:"Vlad.json",3:"Blade_Black.json",4:"Scorpio.json"}
 	var rando_enemy = Math.floor(Math.random() * 4 + 1);
 	this.monster = new Wrestler(enemy_list[rando_enemy]);
@@ -163,6 +182,14 @@ function startfight() {
 	var monster_health_display = document.getElementById('monster_health_display');
 	monster_health_display.innerHTML = window.game.monster.sheet.health;
 	var player_effects_display = document.getElementById('player_effects_display');
+	vol = window.game.player.sheet.moves.length
+	for (i = 0; i < vol; i++) {
+		check = window.game.player.sheet.moves[i]
+		move_id = "m"+check
+		console.log(window.game.moves_library.sheet[move_id])
+		window.game.moves_library.sheet[move_id].player_elig = 1
+		console.log(window.game.moves_library.sheet[move_id].player_elig);
+		}
 }
 
 
@@ -218,17 +245,20 @@ function startturn(){
 		//starts the turn and populates all of the buttons.
 		window.game.turn = 1;
 		document.getElementById("startturnbox").innerHTML=""
+		//add the correct move buttons
 		if (window.game.location == 0) {
 			document.getElementById("movesbox").innerHTML="Move Actions: <button id='move' onclick=\"move('Grapple')\">Grapple!</button><br>"
 		} else {
 			document.getElementById("movesbox").innerHTML="Move Actions: <button id='move' onclick=\"move('iw')\">Irish Whip!</button><br>"			
 		}
-		major_text = "Attack Actions: <br>"+"&nbsp;&nbsp;Anytime:<button id=bodyslam onclick=\"major('bodyslam')\">bodyslam</button><button id=clothesline onclick=\"major('clothesline')\">clothesline</button><br>"+"&nbsp;&nbsp;One Time:"
-		if (window.game.player.sheet.moves.suplex.used == 0) {
-			major_text = major_text + "<button id=suplex onclick=\"major('suplex')\">suplex</button>"
+		//add the always actions
+		major_text = "Attack Actions: <br>"+"&nbsp;&nbsp;Anytime:<button id=bodyslam onclick=\"major('m0')\">bodyslam</button><button id=clothesline onclick=\"major('m1')\">clothesline</button><br>"+"&nbsp;&nbsp;One Time:"
+		//add encounter actions if they haven't been used.
+		if (window.game.player.player_movelist[2].used == 0) {
+			major_text = major_text + "<button id=suplex onclick=\"major('m2')\">suplex</button>"
 		}
-		if (window.game.player.sheet.moves.ddt.used == 0) {
-			major_text = major_text + "<button id=ddt onclick=\"major('ddt')\">ddt</button><br><br>"
+		if (window.game.player.player_movelist[3].used == 0) {
+			major_text = major_text + "<button id=ddt onclick=\"major('m3')\">ddt</button><br><br>"
 		}		
 		document.getElementById("majorsbox").innerHTML=major_text;
 		document.getElementById("endturnbox").innerHTML="<button id='endturn' onclick=\"endturn()\">End Your Turn?</button>";
@@ -250,24 +280,7 @@ function startturn(){
 
 
 
-function effect_if_hit(value) {
-	try {
-		window.game.temp_player_att_bonus = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus;
-		window.game.temp_player_att_bonus_length = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus_length;
-		document.getElementById("player_effects_display").innerHTML="+"+window.game.temp_player_att_bonus+" to attack";
-		console.log("you gain a +"+window.game.temp_player_att_bonus+" to attack for "+window.game.temp_player_att_bonus_length+" turn");
-    } catch(err) {
-    	console.log(" ")
-    }
-}
 
-function effect_if_miss() {
-	console.log(" ")
-}
-
-function effect_hit_or_miss() {
-	console.log(" ")
-}
 
 //This is the move button.
 //for now, all of the player's moves require being "engaged", but the button works the way it should.
@@ -546,6 +559,30 @@ function endturn(){
 
 
 
+
+
+function effect_if_hit(value) {
+	try {
+		window.game.temp_player_att_bonus = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus;
+		window.game.temp_player_att_bonus_length = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus_length;
+		document.getElementById("player_effects_display").innerHTML="+"+window.game.temp_player_att_bonus+" to attack";
+		console.log("you gain a +"+window.game.temp_player_att_bonus+" to attack for "+window.game.temp_player_att_bonus_length+" turn");
+    } catch(err) {
+    	console.log(" ")
+    }
+}
+
+
+
+function effect_if_miss() {
+	console.log(" ")
+}
+
+
+
+function effect_hit_or_miss() {
+	console.log(" ")
+}
 
 
 // in if_hit:
