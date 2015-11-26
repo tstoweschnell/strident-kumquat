@@ -86,6 +86,7 @@ var FightGame = function () {
 	var enemy_list = {1:"Rob_Johnson.json",2:"Vlad.json",3:"Blade_Black.json",4:"Scorpio.json"}
 	var rando_enemy = Math.floor(Math.random() * 4 + 1);
 	this.monster = new Wrestler(enemy_list[rando_enemy]);
+	this.monstermovestaken = []
 	this.temp_player_att_bonus = 0
 	this.temp_player_att_bonus_length = 0
 	this.temp_player_att_temp_counter = 0
@@ -126,7 +127,7 @@ FightGame.prototype.attackroll = function (att_bonus) {
 	} else if (diceRoll == 1) {
 		var att = 0;
 	} else {
-		var att = diceRoll + att_bonus + window.game.temp_player_att_bonus - window.game.movetaken;
+		var att = diceRoll + att_bonus - window.game.movetaken;
 	}
 	return [diceRoll, att];
 };
@@ -163,6 +164,7 @@ function startfight() {
 	window.game.temp_player_att_bonus = 0;
 	window.game.temp_player_att_bonus_length = 0;
 	window.game.temp_player_att_temp_counter = 0;
+	window.game.monstermovestaken = []
 	//this creates a temp health spot.  I don't think i'm using this yet.
 	window.game.temphealth = window.game.player.sheet.health;
 	//drops the word from the startgame button so it seems useless.
@@ -183,13 +185,11 @@ function startfight() {
 	monster_health_display.innerHTML = window.game.monster.sheet.health;
 	var player_effects_display = document.getElementById('player_effects_display');
 	vol = window.game.player.sheet.moves.length
-	for (i = 0; i < vol; i++) {
-		check = window.game.player.sheet.moves[i]
-		move_id = "m"+check
-		console.log(window.game.moves_library.sheet[move_id])
-		window.game.moves_library.sheet[move_id].player_elig = 1
-		console.log(window.game.moves_library.sheet[move_id].player_elig);
-		}
+	//for (i = 0; i < vol; i++) {
+	//	check = window.game.player.sheet.moves[i]
+	//	move_id = "m"+check
+	//	window.game.moves_library.sheet[move_id].player_elig = 1
+	//	}
 }
 
 
@@ -208,6 +208,31 @@ function endfight() {
 		//print about the xp gained.
 		//we don't do anything with the xp yet, but we will eventually.
 		console.log("You have earned Experience! Add "+window.game.monster.sheet.xp_value+" to your xp.")
+		var uniqueNames = [];
+		$.each(window.game.monstermovestaken, function(i, el){
+    		if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+		});
+		var movelistlength = uniqueNames.length
+		var newmoves = []
+		for (i=0; i<movelistlength; i++) {
+			val = window.game.monstermovestaken[i]
+			var a = window.game.player.sheet.moves.indexOf(val);
+			if (a == -1) {
+				newmoves.push(val);
+			}
+		}
+		if (newmoves.length > 0) {
+			console.log("You have earned a new move!")
+			console.log("Rolling for new move...")
+			var diceRoll = Math.floor(Math.random() * newmoves.length);
+			var out = newmoves[diceRoll]
+			window.game.player.sheet.moves.push(out)
+			move_id = "m"+out
+			newmovename = window.game.moves_library.sheet[move_id].moveName
+			console.log("Congratulations!  You have learned "+newmovename+". Use it wisely!")
+		} else {
+			console.log("No new moves for you")
+		}
 		console.log("You now have a total of "+window.game.player.sheet.experience+" xp.  You ready for another fight?")
 	} else {
 		//if the player lost.
@@ -224,9 +249,11 @@ function endfight() {
 	document.getElementById("endturnbox").innerHTML="";
 	document.getElementById("startfightbox").innerHTML="<button id='startfight' onclick=\"startfight()\">Find Another Fight?</button>";
 	window.game.fighting = 0;
-	window.game.player.sheet.moves.ddt.used = 0;
-	window.game.player.sheet.moves.suplex.used = 0;
 	window.game.turn = 0;
+	window.game.location = 0;
+	window.game.movetaken = 0;
+	window.game.majortaken = 0;
+	window.game.minortaken = 0;
 	var enemy_list = {1:"Rob_Johnson.json",2:"Vlad.json",3:"Blade_Black.json",4:"Scorpio.json"}
 	var rando_enemy = Math.floor(Math.random() * 4 + 1);
 	window.game.monster = new Wrestler(enemy_list[rando_enemy]);
@@ -252,14 +279,22 @@ function startturn(){
 			document.getElementById("movesbox").innerHTML="Move Actions: <button id='move' onclick=\"move('iw')\">Irish Whip!</button><br>"			
 		}
 		//add the always actions
-		major_text = "Attack Actions: <br>"+"&nbsp;&nbsp;Anytime:<button id=bodyslam onclick=\"major('m0')\">bodyslam</button><button id=clothesline onclick=\"major('m1')\">clothesline</button><br>"+"&nbsp;&nbsp;One Time:"
+		major_text =  "Attack Actions:"
+		vol = window.game.player.sheet.moves.length
+		for (i = 0; i < vol; i++) {
+			check = window.game.player.sheet.moves[i]
+			move_id = "m"+check
+			name = window.game.moves_library.sheet[move_id].moveName
+			button = "<button id="+name+" onclick=\"major('"+move_id+"')\">"+name+"</button>"
+			major_text += button
+			}
 		//add encounter actions if they haven't been used.
-		if (window.game.player.player_movelist[2].used == 0) {
-			major_text = major_text + "<button id=suplex onclick=\"major('m2')\">suplex</button>"
-		}
-		if (window.game.player.player_movelist[3].used == 0) {
-			major_text = major_text + "<button id=ddt onclick=\"major('m3')\">ddt</button><br><br>"
-		}		
+		//if (window.game.player.player_movelist[2].used == 0) {
+		//	major_text = major_text + "<button id=suplex onclick=\"major('m2')\">suplex</button>"
+		//}
+		//if (window.game.player.player_movelist[3].used == 0) {
+		//	major_text = major_text + "<button id=ddt onclick=\"major('m3')\">ddt</button><br><br>"
+		//}		
 		document.getElementById("majorsbox").innerHTML=major_text;
 		document.getElementById("endturnbox").innerHTML="<button id='endturn' onclick=\"endturn()\">End Your Turn?</button>";
 		if (window.game.temp_player_att_bonus_length == window.game.temp_player_att_temp_counter) {
@@ -322,27 +357,29 @@ function major(value) {
 	// "Encounter" powers can only be used 1 time per fight.  
 	// First we check to make sure the player isn't using a previously used encounter power.
 	// Remove this when we determine how to make those moves go away when used == 1
-	if (window.game.player.sheet.moves[value].used == 1) {
+	if (window.game.moves_library.sheet[value].used == 1) {
 		console.log("Not so fast, hotshot.  You've already used that move!!");
 		console.log("");
 		console.log("What move are you ACTUALLY going to use against "+window.game.monster.sheet.name+"?");
-	} else if (window.game.player.sheet.moves[value].proximity != window.game.location) {
+	} else if (window.game.moves_library.sheet[value].proximity != window.game.location) {
 		// Each move has a location associated with it.  If you are in the wrong place, this message will tell the user they can't use this move.
 		console.log("you can't use that move right now because you are in the wrong location.");
 	} else {
 		document.getElementById("movesbox").innerHTML=""
 		//This section is for if a button works correctly.
-		var att_bonus = window.game.player.sheet.moves[value].attack
+		var att_bonus = window.game.moves_library.sheet[value].attack
 		var rollresults = window.game.attackroll(att_bonus);
-		var deftype = window.game.player.sheet.moves[value].against;
+		var deftype = window.game.moves_library.sheet[value].against;
 		var attackPower = rollresults[1];
+		attackPower = attackPower + window.game.temp_player_att_bonus
 		var diceroll = rollresults[0];
+		var moveName = window.game.moves_library.sheet[value].moveName;
 		if (attackPower == 9000) {
 			console.log("Holy Crap!  A 20!  It's a Critical Hit!");
-			console.log('What a devistating '+value+'!')
-			gif_to_add = '<IMG SRC="'+value+'.gif">'
+			console.log('What a devistating '+moveName+'!')
+			gif_to_add = '<IMG SRC="'+moveName+'.gif">'
 			document.getElementById("animations").innerHTML=gif_to_add;
-			var dmg = window.game.player.sheet.moves[value].damagevol *(window.game.player.sheet.moves[value].damagedice + window.game.player.sheet.moves[value].damagebonus)
+			var dmg = window.game.moves_library.sheet[value].damagevol *(window.game.moves_library.sheet[value].damagedice + window.game.moves_library.sheet[value].damagebonus)
 			console.log("You generated automatic "+dmg+" damage")
 			window.game.monster.sheet.health = window.game.monster.sheet.health - dmg
 			monster_health_display.innerHTML = window.game.monster.sheet.health
@@ -358,9 +395,9 @@ function major(value) {
 			console.log("You tripped and hurt yourself.  Way to go Doof!");
 			gif_to_add = '<IMG SRC="botch.gif">'
 			document.getElementById("animations").innerHTML=gif_to_add;
-			var dicevol = window.game.player.sheet.moves[value].damagevol
-			var dicetype = window.game.player.sheet.moves[value].damagedice
-			var dmgbonus = window.game.player.sheet.moves[value].damagebonus			
+			var dicevol = window.game.moves_library.sheet[value].damagevol
+			var dicetype = window.game.moves_library.sheet[value].damagedice
+			var dmgbonus = window.game.moves_library.sheet[value].damagebonus			
 			var dmg = window.game.damageroll(dicevol, dicetype, dmgbonus)
 			window.game.temphealth = window.game.temphealth - dmg
 			player_health_display.innerHTML = window.game.temphealth
@@ -376,11 +413,11 @@ function major(value) {
 		} else if (attackPower > window.game.monster.sheet.defenses[deftype]) {
 			console.log("The dice comes up "+diceroll+". The attack roll: "+attackPower);
 			console.log("It's a HIT!");
-			gif_to_add = '<IMG SRC="'+value+'.gif">'
+			gif_to_add = '<IMG SRC="'+moveName+'.gif">'
 			document.getElementById("animations").innerHTML=gif_to_add;
-			var dicevol = window.game.player.sheet.moves[value].damagevol
-			var dicetype = window.game.player.sheet.moves[value].damagedice
-			var dmgbonus = window.game.player.sheet.moves[value].damagebonus
+			var dicevol = window.game.moves_library.sheet[value].damagevol
+			var dicetype = window.game.moves_library.sheet[value].damagedice
+			var dmgbonus = window.game.moves_library.sheet[value].damagebonus
 			var dmg = window.game.damageroll(dicevol, dicetype, dmgbonus)
 			window.game.monster.sheet.health = window.game.monster.sheet.health - dmg
 			monster_health_display.innerHTML = window.game.monster.sheet.health
@@ -400,10 +437,10 @@ function major(value) {
 			effect_if_miss();
 			effect_hit_or_miss();
 		};
-		if (window.game.player.sheet.moves[value].frequency == 'atwill') {
-			window.game.player.sheet.moves[value].used = 0
+		if (window.game.moves_library.sheet[value].frequency == 'atwill') {
+			window.game.moves_library.sheet[value].used = 0
 		} else {
-			window.game.player.sheet.moves[value].used = 1
+			window.game.moves_library.sheet[value].used = 1
 		}
 		console.log(" ")
 		document.getElementById("majorsbox").innerHTML=""
@@ -419,50 +456,73 @@ function major(value) {
 FightGame.prototype.monsteraction = function() {
 	var name = this.monster.sheet.name;
 	if (name == 'Vlad the Impaler') {
+		if (window.game.location == 0) {
+			window.game.location = 1
+			window.game.movetaken = 1
+			console.log("Vlad goes for a traditional grapple")
+		}
 		//Vlad gets to use vicious piledriver only after hitting with the piledriver.
-		if (this.monster.sheet.moves.piledriver.hit == 0) {
-			var movechoice = "piledriver"
+		if (window.game.moves_library.sheet.m10.hit == 0) {
+			var movechoice = "m10"
+			var name = window.game.moves_library.sheet.m10.moveName
 		} else {
-			var movechoice = "vicious piledriver"
-			this.monster.sheet.moves.piledriver.hit = 0
+			var movechoice = "m11"
+			window.game.moves_library.sheet.m10.hit = 0
+			var name = window.game.moves_library.sheet.m11.moveName
 		}
-		console.log("Vlad uses "+movechoice)
+		console.log("Vlad uses "+name)
 	} else if (name == 'Blade Black') {
-		//Blade gets to use reverse bulldog only after hitting with the bulldog.
-		if (this.monster.sheet.moves.bulldog.hit == 0) {
-			var movechoice = "bulldog"
-		} else {
-			var movechoice = "reverse bulldog"
-			this.monster.sheet.moves.bulldog.hit = 0
+		if (window.game.location == 0) {
+			window.game.location = 1
+			window.game.movetaken = 1
+			console.log("Blade moves in for a closer attack")
 		}
-		console.log("Blade Black uses "+movechoice)
+		//Blade gets to use reverse bulldog only after hitting with the bulldog.
+		if (window.game.moves_library.sheet.m4.hit == 0) {
+			var movechoice = "m4"
+			var name = window.game.moves_library.sheet.m4.moveName
+		} else {
+			var movechoice = "m5"
+			window.game.moves_library.sheet.m4.hit = 0
+			var name = window.game.moves_library.sheet.m5.moveName
+		}
+		
+		console.log("Blade Black uses "+name)
 	} else if (name == 'Scorpio') {
+		if (window.game.location == 0) {
+			window.game.location = 1
+			window.game.movetaken = 1
+			console.log("Scorpio is going in for the kill")
+		}
 		//Scorpio only knows big boot.
-		var movechoice = "Big Boot"
-		console.log("Scorpio uses "+movechoice)
+		var movechoice = "m9"
+		var name = window.game.moves_library.sheet.m9.moveName
+		console.log("Scorpio only knows "+name+", so he chooses "+name)
 	} else {
 		//Rob Johnson is the most complicated.
 		//He will always move away from the player.
 		//He can use dropkick flurry once, then he can recharge it.
 		if (window.game.location == 1) {
-			console.log("Rob steps back and bounces off the ropes")
 			window.game.location = 0
-		} else {
-			window.game.movetaken = 0
+			window.game.movetaken = 1
+			console.log("Rob steps back and bounces off the ropes")
 		}
-		if (this.monster.sheet.moves.dropkick_flurry.used == 0) {
-			var movechoice = "dropkick_flurry"
-			this.monster.sheet.moves.dropkick_flurry.used = 1
+		if (window.game.moves_library.sheet.m8.hit == 0) {
+			var movechoice = "m8"
+			window.game.moves_library.sheet.m8.hit = 1
+			name = window.game.moves_library.sheet.m8.moveName
 		} else {
 			recharge = Math.floor(Math.random() * 6 + 1)
 			if (recharge > 4){
 				console.log("Rob is ready to dropkick flurry again!");
-				var movechoice = "dropkick_flurry";
+				var movechoice = "m8";
+				name = window.game.moves_library.sheet.m8.moveName
 			} else {
-				var movechoice = "dropkick";
+				var movechoice = "m7";
+				name = window.game.moves_library.sheet.m8.moveName
 			}
 		}
-		console.log("Rob uses "+this.monster.sheet.moves[movechoice].moveName)
+		console.log("Rob uses "+name)
 	}
 	return movechoice
 };
@@ -472,16 +532,19 @@ FightGame.prototype.monsteraction = function() {
 
 
 function monster_major(movechoice) {
-	var deftype = window.game.monster.sheet.moves[movechoice].against;
-	var attbonus = window.game.monster.sheet.moves[movechoice].attack;
+	var deftype = window.game.moves_library.sheet[movechoice].against
+	var attbonus = window.game.moves_library.sheet[movechoice].attack
+	var dicevol = window.game.moves_library.sheet[movechoice].damagevol
+	var dicetype = window.game.moves_library.sheet[movechoice].damagedice
+	var dmgbonus = window.game.moves_library.sheet[movechoice].damagebonus
 	var mon_attroll = window.game.attackroll(attbonus)
 	var monatt = mon_attroll[1]
 	var diceroll = mon_attroll[0]
 	//if the monster crits.
 	if (monatt == 9000) {
-		window.game.monster.sheet.moves[movechoice].hit = 1
+		window.game.moves_library.sheet[movechoice].hit = 1
 		console.log("A devastating critical hit!")
-		var dmg = window.game.monster.sheet.moves[movechoice].damagevol * (window.game.monster.sheet.moves[movechoice].damagedice + window.game.monster.sheet.moves[movechoice].damagebonus)
+		var dmg = window.game.moves_library.sheet[movechoice].damagevol * (window.game.moves_library.sheet[movechoice].damagedice + window.game.moves_library.sheet[movechoice].damagebonus)
 		console.log(""+window.game.monster.sheet.name+" generated an automatic "+dmg+" damage")
 		window.game.temphealth = window.game.temphealth - dmg
 		player_health_display.innerHTML = window.game.temphealth
@@ -494,9 +557,6 @@ function monster_major(movechoice) {
 	//if the monster botches.
 	} else if (monatt == 0) {
 		console.log("Whoops! He made a big mistake...")
-		var dicevol = window.game.monster.sheet.moves[movechoice].damagevol
-		var dicetype = window.game.monster.sheet.moves[movechoice].damagedice
-		var dmgbonus = window.game.monster.sheet.moves[movechoice].damagebonus
 		var dmg = window.game.damageroll(dicevol,dicetype,dmgbonus)
 		window.game.monster.sheet.health = window.game.monster.sheet.health - dmg
 		monster_health_display.innerHTML = window.game.monster.sheet.health
@@ -508,12 +568,9 @@ function monster_major(movechoice) {
 		};
 	//if the monster hits.
 	} else if (monatt > window.game.player.sheet.defenses[deftype]) {
-		window.game.monster.sheet.moves[movechoice].hit = 1
+		window.game.moves_library.sheet[movechoice].hit = 1
 		console.log("The dice comes up "+diceroll+". The attack roll: "+monatt);
 		console.log("It's a HIT!");
-		var dicevol = window.game.monster.sheet.moves[movechoice].damagevol
-		var dicetype = window.game.monster.sheet.moves[movechoice].damagedice
-		var dmgbonus = window.game.monster.sheet.moves[movechoice].damagebonus
 		var dmg = window.game.damageroll(dicevol,dicetype,dmgbonus)
 		window.game.temphealth = window.game.temphealth - dmg
 		player_health_display.innerHTML = window.game.temphealth
@@ -525,7 +582,7 @@ function monster_major(movechoice) {
 		}
 	//if the monster misses.
 	} else {
-		window.game.monster.sheet.moves[movechoice].hit = 0
+		window.game.moves_library.sheet[movechoice].hit = 0
 		console.log("The dice comes up "+diceroll+". The attack roll: "+monatt);
 		console.log("You evade "+window.game.monster.sheet.name+"'s attack!");
 	}
@@ -550,7 +607,10 @@ function endturn(){
 	//when the monster's turn is over, reset everything and allow the player to start their turn.
 	if (window.game.fighting == 1){
 		document.getElementById("startturnbox").innerHTML="<button id='startturn' onclick='startturn()'>Start Your Turn!</button>"
-	}
+	};
+	action = monster_actions.slice(1)
+	action = Number(action)
+	window.game.monstermovestaken.push(action);
 	window.game.turn = 0;
 	window.game.minortaken = 0;
 	window.game.majortaken = 0;
@@ -563,8 +623,8 @@ function endturn(){
 
 function effect_if_hit(value) {
 	try {
-		window.game.temp_player_att_bonus = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus;
-		window.game.temp_player_att_bonus_length = window.game.player.sheet.moves[value].if_hit.temp_player_att_bonus_length;
+		window.game.temp_player_att_bonus = window.game.moves_library.sheet[value].if_hit.temp_player_att_bonus;
+		window.game.temp_player_att_bonus_length = window.game.moves_library.sheet[value].if_hit.temp_player_att_bonus_length;
 		document.getElementById("player_effects_display").innerHTML="+"+window.game.temp_player_att_bonus+" to attack";
 		console.log("you gain a +"+window.game.temp_player_att_bonus+" to attack for "+window.game.temp_player_att_bonus_length+" turn");
     } catch(err) {

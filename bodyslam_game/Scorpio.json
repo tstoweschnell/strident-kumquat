@@ -10,20 +10,5 @@
 		"reflex":12,
 		"will":11
 	},
-	"moves":{
-		"Big Boot":{
-			"id":1,
-			"moveName":"Big Boot",
-			"frequency":"atwill",
-			"proximity":1,
-			"against":"reflex",
-			"attack":8,
-			"damagevol":1,
-			"damagedice":6,
-			"damagebonus":8,
-			"description":"That one stung.  It keeps on stinging.",
-			"used":0
-		}
-	},
 	"needswork":1
 }
