@@ -1,0 +1,24 @@
+{
+	"f0":{
+		"moveName":"Swinging Neckbreaker",
+		"frequency":"atwill",
+		"against":"ac",
+		"proximity":1,
+		"attack":0,
+		"damagevol":3,
+		"damagedice":10,
+		"damagebonus":2,
+		"description":"Smooth as a baby's tucus."
+	},
+	"f1":{
+		"moveName":"Rock Bottom",
+		"frequency":"atwill",
+		"against":"ac",
+		"proximity":1,
+		"attack":6,
+		"damagevol":3,
+		"damagedice":6,
+		"damagebonus":6,
+		"description":"It dont matter how hard it hurts, as long as it hurts!"
+	}
+}

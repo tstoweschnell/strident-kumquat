@@ -1,0 +1,83 @@
+<html>
+<head>
+  <title>BodySlam Game</title>
+  <style type="text/css">
+body {
+ background-color: #000000;
+ font-family: "Lucida Console","Courier New",Courier,monospace;
+ font-size: medium;
+ color: #FFFFFF
+}
+a:link, a:visited, a:hover, a:active {
+ color: #FF99FF;
+ text-decoration: underline
+}
+.debug {
+ color: #999999
+}
+.lime {
+ color: #00FF00
+}
+.red {
+ color: #FF0000
+}
+.yellow {
+ color: #FFFF00
+}
+.orange {
+ color: #FF9900
+}
+.boxed {
+  border: 1px solid #000000 ;
+}
+#healthbox {
+	float: left;
+    width: 250px;
+    height: 300px;
+    overflow-y: auto;
+    background-color: #FFFFFF;
+    color: #000000
+}
+#buttonsbox {
+    float: left;
+    width: 250px;
+    height: 300px;
+    background-color: #FFFFFF;
+    color: #000000
+}
+#gamelog {
+    float: left;
+    width: 600px;
+    height: 300px;
+    overflow-y: auto;
+    background-color: #FFFFFF;
+    color: #000000
+}
+</style>
+</head>
+<body>
+<!--This text is static.  It is the intro to the game.  Need to transition this to a introduction and instructions page-->
+<div id="container">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<body id="gamebody">
+	<div id="animations" name="animations"><IMG SRC="gifs/ChampionshipWrestling.jpg"></div>
+	<div id="gamelog" name="gamelog"></div>
+	<div id="buttonsbox" class="boxed"><center>
+		<button id='start_cc' onclick="startcc()">Ready to Start?</button>
+	</div>
+	<div id="healthbox" class="boxed"><center>
+		<!--This is the box for the health and updates.  This updates via actions in the javascript.-->
+		Name: <div id="namebox"></div><br>
+		Style: <div id="stylebox"></div><br>
+		Stats: <div id="skillsbox"></div><br>
+		Gimmick: <div id="gimmickbox"></div><br>
+		Defenses: <div id="defensebox"></div><br>
+		Health: <div id="totalhealthbox"></div><br>
+		Moves: <div id="moveslistbox"></div>
+	</div>
+	<script type="text/javascript" src="character_creation.js" ></script>
+</body>
+</div>
+</center>
+</body>
+</html>

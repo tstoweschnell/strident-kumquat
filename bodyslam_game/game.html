@@ -34,6 +34,7 @@ a:link, a:visited, a:hover, a:active {
 	float: left;
     width: 250px;
     height: 300px;
+    overflow-y: auto;
     background-color: #FFFFFF;
     color: #000000
 }
@@ -59,27 +60,22 @@ a:link, a:visited, a:hover, a:active {
 <div id="container">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <body id="gamebody">
-	<div id="animations" name="animations"><IMG SRC="ChampionshipWrestling.jpg"></div>
+	<div id="animations" name="animations"><IMG SRC="gifs/ChampionshipWrestling.jpg"></div>
 	<div id="gamelog" name="gamelog"></div>
 	<div id="buttonsbox" class="boxed"><center>
-		<!--This is the box for the buttons.-->	
 		<script type="text/javascript" src="game.js" ></script>
-		<!--I still dont know how to get buttons to appear and disappear, so for now, I make them non-functional and remove the words.-->
-		<div id='startfightbox'><button id='startfight' onclick="startfight()">Find a Fight!</button></div><br><br>
-		<div id='startturnbox'></div><br><br>
-		<div id='movesbox'></div>
-		<div id='minorsbox'></div>
-		<div id='majorsbox'></div>
-		<div id='endturnbox'></div></center>	
+		<button id='start_cc' onclick="startcc()">Ready to Start?</button>
 	</div>
 	<div id="healthbox" class="boxed"><center>
 		<!--This is the box for the health and updates.  This updates via actions in the javascript.-->
-		Brooklyn Brawler:<br>
-		Health: <div id="player_health_display"></div><br><br>
-		<div id="player_effects_display"></div><br><br>
-		Opponent:<br>
-		<div id="monster_name_display"></div><br>
-		Health: <div id="monster_health_display"></div><br></center></div>
+		Name: <div id="namebox"></div><br>
+		Style: <div id="stylebox"></div><br>
+		Stats: <div id="skillsbox"></div><br>
+		Gimmick: <div id="gimmickbox"></div><br>
+		Defenses: <div id="defensebox"></div><br>
+		Health: <div id="totalhealthbox"></div><br>
+		Moves: <div id="moveslistbox"></div>
+
 </body>
 </div>
 </center>

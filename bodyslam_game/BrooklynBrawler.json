@@ -9,7 +9,7 @@
 	"defenses":{
 		"ac":16,
 		"fortitude":16,
-		"reflex":10,
+		"reflex":12,
 		"will":12
 	},
 	"skillset":{
@@ -20,5 +20,6 @@
 		"wisdom":2,
 		"charisma":0
 	},
-	"moves":[0,1,2,3]
+	"moves":[0,1,2,3],
+	"finisher":0
 }
