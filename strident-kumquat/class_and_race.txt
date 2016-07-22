@@ -1,0 +1,78 @@
+class
+cleric
+	hp per level = 5
+	turn undead
+	healing word
+	healing lore
+
+
+
+fighter
+	challenge
+	combat superiority
+
+
+ranger
+	+2 to ac v opp attacks
+	+1d6 dmg to quarry
+	+1 to ranged att
+
+
+wizard
+	cantrips
+	staff of defense
+
+
+paladin
+	divine mettle
+	divine strength
+	divine challenge
+	lay on hands
+	
+
+warlock
+	eldrich pact
+	prime shot
+	warlocks curse
+
+
+
+
+Race
+
+Dragonborn
+	+1 to att when less than 1/2 health
+
+Dwarf
+	+5 to saving throw against poison
+	use second wind as minor instead of major
+	-1 to all push effects against you
+	
+Eladrin
+	+5 against charm
+	Fey Step Power
+	
+
+Elf
+	Elven Accuracy
+
+
+Half-Elf
+	1 bonus power
+
+
+Halfling
+	+5 against fear
+	+2 to def against opp att
+	Second Chance
+
+Human
+	+2 to 1 power
+	1 bonus power
+
+
+Tiefling
+	+1 to att when opponent <1/2 health
+	fire resist 5 + 1/2 level
+	infernal wrath
+

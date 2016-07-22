@@ -1,0 +1,14 @@
+{
+	"name":"Rob Johnson",
+	"codename":"Halfling Slinger",
+	"level":1,
+	"xp_value":100,
+	"health":22,
+	"defenses":{
+		"toughness":15,
+		"fortitude":12,
+		"reflex":15,
+		"will":13
+	},
+	"needswork":1
+}

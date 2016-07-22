@@ -1,0 +1,81 @@
+{
+	"name":"Bulk Logan",
+	"record":{
+		"wins":0,
+		"losses":0
+		},
+	"experience":0,
+	"health":30,
+	"defenses":{
+		"ac":16,
+		"fortitude":16,
+		"reflex":10,
+		"will":12
+	},
+	"skillset":{
+		"strength":1,
+		"constitution":1,
+		"dexterity":1,
+		"intelligence":1,
+		"wisdom":1,
+		"charisma":1
+	},
+	"moves":{
+		"bodyslam":{
+			"id":1,
+			"moveName":"bodyslam",
+			"frequency":"atwill",
+			"against":"reflex",
+			"proximity":0,
+			"attack":8,
+			"damagevol":1,
+			"damagedice":8,
+			"damagebonus":1,
+			"description":"An old school move for an old school badass.",
+			"used":0,
+			"if_hit":{
+				"temp_player_att_bonus":2,
+				"temp_player_att_bonus_length":1
+			}
+		},
+		"clothesline":{
+			"id":2,
+			"moveName":"clothesline",
+			"frequency":"atwill",
+			"against":"ac",
+			"proximity":1,
+			"attack":4,
+			"damagevol":1,
+			"damagedice":12,
+			"damagebonus":4,
+			"description":"It dont matter how hard it hurts, as long as it hurts!",
+			"used":0
+		},
+		"suplex":{
+			"id":3,
+			"moveName":"suplex",
+			"frequency":"signature",
+			"against":"ac",
+			"proximity":1,
+			"attack":4,
+			"damagevol":2,
+			"damagedice":12,
+			"damagebonus":4,
+			"description":"No matter how tough your opponent is, that's got to hurt!",
+			"used":0
+		},
+		"ddt":{
+			"id":4,
+			"moveName":"DDT",
+			"frequency":"finisher",
+			"against":"ac",
+			"proximity":1,
+			"attack":4,
+			"damagevol":3,
+			"damagedice":12,
+			"damagebonus":4,
+			"description":"One of the most bone-shattering moves in history!",
+			"used":0
+		}
+	}
+}

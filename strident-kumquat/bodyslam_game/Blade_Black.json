@@ -1,0 +1,14 @@
+{
+	"name":"Blade Black",
+	"codename":"Goblin Blackblade",
+	"level":1,
+	"xp_value":100,
+	"health":25,
+	"defenses":{
+		"toughness":16,
+		"fortitude":12,
+		"reflex":14,
+		"will":11
+	},
+	"needswork":1
+}

@@ -1,0 +1,14 @@
+{
+	"name":"Scorpio",
+	"codename":"Stormclaw Scorpion",
+	"level":1,
+	"xp_value":100,
+	"health":32,
+	"defenses":{
+		"toughness":16,
+		"fortitude":14,
+		"reflex":12,
+		"will":11
+	},
+	"needswork":1
+}

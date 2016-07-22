@@ -1,0 +1,100 @@
+<html>
+<head>
+  <title>BodySlam Game</title>
+  <style type="text/css">
+body {
+ background-color: #000000;
+ font-family: "Lucida Console","Courier New",Courier,monospace;
+ font-size: medium;
+ color: #FFFFFF
+}
+a:link, a:visited, a:hover, a:active {
+ color: #FF99FF;
+ text-decoration: underline
+}
+.debug {
+ color: #999999
+}
+.lime {
+ color: #00FF00
+}
+.red {
+ color: #FF0000
+}
+.yellow {
+ color: #FFFF00
+}
+.orange {
+ color: #FF9900
+}
+.boxed {
+  border: 1px solid #000000 ;
+}
+#healthbox {
+    overflow-y: auto;
+}
+#buttonsbox {
+}
+#moves_library {
+}
+#opponent_library {
+}
+#gamelog {
+    width: 600px;
+    height: 100px;
+    overflow-y: auto;
+    background-color: #FFFFFF;
+    color: #000000
+}
+#currentevents {
+    width: 600px;
+    height: 200px;
+    overflow-y: auto;
+    background-color: #FFFFFF;
+    color: #000000
+}
+#numberbox {
+    font-size: 60px;
+    background-color: lightgrey;
+    width: 80px;
+    height: 80px;
+    display: none;
+    color: #000000
+}
+</style>
+</head>
+<div id="container">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<body id="gamebody">
+	<div id="animations" name="animations"><IMG SRC="gifs/ChampionshipWrestling.jpg"></div>
+	<div id='numberbox'></div>
+	Current Events:
+	<div id="currentevents" name="currentevents" class="boxed"></div><p><br><p>
+	Your Buttons<p><br><p>
+	<div id="buttonsbox" class="boxed"><center>
+		<script type="text/javascript" src="game.js" ></script>
+		<button id='start_cc' onclick="startcc()">Ready to Start?</button>
+	</div><p><br><p>
+	Info Box:<p><br><p>
+	<div id="healthbox" class="boxed"></div><p><br><p>
+	Your Character Sheet:<p><br><p>
+	<div id="character_sheet" class="boxed">
+		Name: <div id="namebox"></div><br>
+		XP: <div id="xpbox"></div><br>
+		Style: <div id="stylebox"></div><br>
+		Stats: <div id="skillsbox"></div><br>
+		Gimmick: <div id="gimmickbox"></div><br>
+		Defenses: <div id="defensebox"></div><br>
+		Health: <div id="totalhealthbox"></div><br>
+		Moves: <div id="moveslistbox"></div>
+	</div><p><br><p>	
+	Your Moves:<p><br><p>
+	<div id="moves_library" class="boxed"></div><p><br><p>
+	Your Opponent:<p><br><p>
+	<div id="opponent_library" class="boxed"></div><p><br><p>
+	Overall Game Log:<p><br><p>
+	<div id="gamelog" name="gamelog" class="boxed"></div>
+</body>
+</div>
+</body>
+</html>
